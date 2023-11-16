@@ -46,11 +46,11 @@ app.post('/api/users/register', async (req, res) => {
     }
 });
 
+// Modify the login endpoint to return a JSON response
 app.post('/api/users/login', async (req, res) => {
     const { username, password } = req.body;
 
     try {
- 
         const result = await pool.query('SELECT * FROM "users" WHERE username = $1', [username]);
 
         if (result.rows.length > 0) {
@@ -58,21 +58,19 @@ app.post('/api/users/login', async (req, res) => {
             const isPasswordMatch = await bcrypt.compare(password, user.password);
 
             if (isPasswordMatch) {
-     
-                res.status(200).json({ message: 'Login successful' });
+                res.status(200).json({ success: true, message: 'Login successful' });
             } else {
-
-                res.status(401).json({ message: 'Incorrect password' });
+                res.status(401).json({ success: false, message: 'Incorrect password' });
             }
         } else {
-
-            res.status(404).json({ message: 'User not found' });
+            res.status(404).json({ success: false, message: 'User not found' });
         }
     } catch (error) {
         console.error(error);
-        res.status(500).send('Internal Server Error');
+        res.status(500).json({ success: false, message: 'Internal Server Error' });
     }
 });
+
 
 
 app.get('/api/users', async (req, res)  => {

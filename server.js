@@ -216,3 +216,70 @@ app.delete('/api/exercise/:exercise_id', async (req, res) => {
     }
   });
   
+app.get('/api/exercise_log', async (req, res) => {
+    try {
+      const result = await pool.query('SELECT * FROM exercise_log');
+      res.status(200).json(result.rows);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Bad Request');
+    }
+  });
+  
+app.get('/api/exercise_log/:log_id', async (req, res) => {
+    const logId = req.params.log_id;
+    try {
+      const result = await pool.query('SELECT * FROM "exercise_log" WHERE log_id = $1', [logId]);
+      const exerciseLog = result.rows[0];
+      res.json(exerciseLog);
+    } catch (error) {
+      console.error(error);
+      res.status(404).send('Exercise Log not found');
+    }
+  });
+  
+app.post('/api/exercise_log', async (req, res) => {
+    const { plan_id, exercise_id, user_id, date, sets_completed, reps_completed, weight_used, duration, notes } = req.body;
+    try {
+      const result = await pool.query(
+        'INSERT INTO "exercise_log" (plan_id, exercise_id, user_id, date, sets_completed, reps_completed, weight_used, duration, notes) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *',
+        [plan_id, exercise_id, user_id, date, sets_completed, reps_completed, weight_used, duration, notes]
+      );
+      const newExerciseLog = result.rows[0];
+      res.status(201).json(newExerciseLog);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
+  
+app.put('/api/exercise_log/:log_id', async (req, res) => {
+    const logId = req.params.log_id;
+    const { plan_id, exercise_id, user_id, date, sets_completed, reps_completed, weight_used, duration, notes } = req.body;
+    try {
+      const result = await pool.query(
+        'UPDATE "exercise_log" SET plan_id = $1, exercise_id = $2, user_id = $3, date = $4, sets_completed = $5, reps_completed = $6, weight_used = $7, duration = $8, notes = $9 WHERE log_id = $10 RETURNING *',
+        [plan_id, exercise_id, user_id, date, sets_completed, reps_completed, weight_used, duration, notes, logId]
+      );
+      const updatedExerciseLog = result.rows[0];
+      res.json(updatedExerciseLog);
+    } catch (error) {
+      console.error(error);
+      res.status(404).send('Exercise Log not found');
+    }
+  });
+  
+app.delete('/api/exercise_log/:log_id', async (req, res) => {
+    const logId = req.params.log_id;
+    try {
+      await pool.query('DELETE FROM "exercise_log" WHERE log_id = $1', [logId]);
+      res.status(204).send();
+    } catch (error) {
+      console.error(error);
+      res.status(404).send('Exercise Log not found');
+    }
+  });
+  
+app.listen(PORT, () => {
+    console.log(`Listening on port; ${PORT}`)
+});

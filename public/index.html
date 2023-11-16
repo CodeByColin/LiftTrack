@@ -4,7 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+    <script src="main.js" defer></script>
 </head>
 <body>
+    <div id="overlay">
+        <div id="popup">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <label for="username">Username:</label>
+                <input type="text" id="username" required>
+                <br>
+                <label for="password">Password:</label>
+                <input type="password" id="password" required>
+                <br>
+                <button type="button" onclick="login()">Login</button>
+                <button type="button" onclick="showRegisterPopup()">Register</button>
+            </form>
+        </div>
+    
+        <div id="registerPopup">
+            <h2>Register</h2>
+            <form id="registerForm">
+                <label for="registerUsername">Username:</label>
+                <input type="text" id="registerUsername" required>
+                <br>
+                <label for="registerPassword">Password:</label>
+                <input type="password" id="registerPassword" required>
+                <br>
+                <button type="button" onclick="register()">Register</button>
+                <button type="button" onclick="showLoginPopup()">Back to Login</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

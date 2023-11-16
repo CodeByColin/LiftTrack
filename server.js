@@ -1,27 +1,80 @@
 import express from 'express';
 import pg from 'pg';
 import dotenv from 'dotenv';
+import bcrypt from 'bcrypt';
+import cors from 'cors';
 
+dotenv.config()
 
+const app = express();
+app.use(express.static('public'));
+app.use(cors());
 
 const {Pool} = pg;
-const app = express();
 const PORT = 3000;
-app.use(express.static('public'))
 
 const pool = new Pool({
-    user: 'colin',
-    host: 'localhost',
-    database: 'lifttracker',
-    password: '',
-    port: 5432
-})
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT,
+});
 
 app.use(express.json());
 
 app.get('/', (req, res) => {
     res.send('Lift Track API!');
-})
+});
+
+app.post('/api/users/register', async (req, res) => {
+    const { username, password } = req.body;
+
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    try {
+        // Insert user data into the database
+        const result = await pool.query(
+            'INSERT INTO "users" (username, password) VALUES ($1, $2) RETURNING *',
+            [username, hashedPassword]
+        );
+
+        const newUser = result.rows[0];
+        res.status(201).json(newUser);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+app.post('/api/users/login', async (req, res) => {
+    const { username, password } = req.body;
+
+    try {
+ 
+        const result = await pool.query('SELECT * FROM "users" WHERE username = $1', [username]);
+
+        if (result.rows.length > 0) {
+            const user = result.rows[0];
+            const isPasswordMatch = await bcrypt.compare(password, user.password);
+
+            if (isPasswordMatch) {
+     
+                res.status(200).json({ message: 'Login successful' });
+            } else {
+
+                res.status(401).json({ message: 'Incorrect password' });
+            }
+        } else {
+
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
 
 
 app.get('/api/users', async (req, res)  => {

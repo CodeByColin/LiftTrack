@@ -1,14 +1,13 @@
-document.addEventListener('DOMContentLoaded', function() {
 
 function showLoginPopup() {
     document.getElementById('popup').style.display = 'block';
     document.getElementById('registerPopup').style.display = 'none';
-}
+};
 
 function showRegisterPopup() {
     document.getElementById('popup').style.display = 'none';
     document.getElementById('registerPopup').style.display = 'block';
-}
+};
 
 async function login() {
     const username = document.getElementById('username').value;
@@ -41,12 +40,10 @@ async function login() {
 }
 
 
-
-
 async function register() {
     const registerUsername = document.getElementById('registerUsername').value;
     const registerPassword = document.getElementById('registerPassword').value;
-    //https://fittracker-lc3q.onrender.com/api/users/register
+
     try {
         const response = await fetch('https://fittracker-lc3q.onrender.com/api/users/register', {
             method: 'POST',
@@ -69,6 +66,6 @@ async function register() {
         alert('An error occurred. Please try again.');
     }
 }
-});
+
 
 

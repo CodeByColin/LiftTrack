@@ -46,7 +46,6 @@ app.post('/api/users/register', async (req, res) => {
     }
 });
 
-// Modify the login endpoint to return a JSON response
 app.post('/api/users/login', async (req, res) => {
     const { username, password } = req.body;
 

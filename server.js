@@ -13,7 +13,7 @@ app.use(express.static('public'));
 
 const {Pool} = pg;
 const dbString = process.env.DATABASE_URL;
-const PORT = 3000;
+const PORT = process.env.PORT;
 
 const pool = new Pool({
     connectionString: dbString

@@ -19,7 +19,6 @@ CREATE TABLE Exercise (
     exercise_name VARCHAR(255) NOT NULL,
     sets INT,
     repetitions INT,
-    weight FLOAT,
     notes TEXT
 );
 

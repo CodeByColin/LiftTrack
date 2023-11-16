@@ -46,7 +46,7 @@ app.get('/api/users/:user_id', async (req, res) => {
     }
   });
 
-  app.post('/api/users', async (req, res) => {
+app.post('/api/users', async (req, res) => {
     const { username, password } = req.body;
     try {
       const result = await pool.query(
@@ -61,7 +61,7 @@ app.get('/api/users/:user_id', async (req, res) => {
     }
   });
 
-  app.put('/api/users/:user_id', async (req, res) => {
+app.put('/api/users/:user_id', async (req, res) => {
     const userId = req.params.user_id;
     const { username, password } = req.body;
     try {
@@ -77,7 +77,7 @@ app.get('/api/users/:user_id', async (req, res) => {
     }
   });
   
-  app.delete('/api/users/:user_id', async (req, res) => {
+app.delete('/api/users/:user_id', async (req, res) => {
     const userId = req.params.user_id;
     try {
       await pool.query('DELETE FROM "users" WHERE user_id = $1', [userId]);
@@ -88,6 +88,69 @@ app.get('/api/users/:user_id', async (req, res) => {
     }
   });
 
-app.listen(PORT, () => {
-    console.log(`Listening on port; ${PORT}`)
-});
+app.get('/api/workout_plan', async (req, res) => {
+    try {
+      const result = await pool.query('SELECT * FROM workout_plan');
+      res.status(200).json(result.rows);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Bad Request');
+    }
+  });
+  
+app.get('/api/workout_plan/:plan_id', async (req, res) => {
+    const planId = req.params.plan_id;
+    try {
+      const result = await pool.query('SELECT * FROM "workout_plan" WHERE plan_id = $1', [planId]);
+      const workoutPlan = result.rows[0];
+      res.json(workoutPlan);
+    } catch (error) {
+      console.error(error);
+      res.status(404).send('Workout Plan not found');
+    }
+  });
+  
+app.post('/api/workout_plan', async (req, res) => {
+    const { user_id, plan_name, description } = req.body;
+    try {
+      const result = await pool.query(
+        'INSERT INTO "workout_plan" (user_id, plan_name, description) VALUES ($1, $2, $3) RETURNING *',
+        [user_id, plan_name, description]
+      );
+      const newWorkoutPlan = result.rows[0];
+      res.status(201).json(newWorkoutPlan);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
+  
+app.put('/api/workout_plan/:plan_id', async (req, res) => {
+    const planId = req.params.plan_id;
+    const { user_id, plan_name, description } = req.body;
+    try {
+      const result = await pool.query(
+        'UPDATE "workout_plan" SET user_id = $1, plan_name = $2, description = $3 WHERE plan_id = $4 RETURNING *',
+        [user_id, plan_name, description, planId]
+      );
+      const updatedWorkoutPlan = result.rows[0];
+      res.json(updatedWorkoutPlan);
+    } catch (error) {
+      console.error(error);
+      res.status(404).send('Workout Plan not found');
+    }
+  });
+  
+  app.delete('/api/workout_plan/:plan_id', async (req, res) => {
+    const planId = req.params.plan_id;
+    try {
+      await pool.query('DELETE FROM "workout_plan" WHERE plan_id = $1', [planId]);
+      res.status(204).send();
+    } catch (error) {
+      console.error(error);
+      res.status(404).send('Workout Plan not found');
+    }
+  });
+  
+
+  

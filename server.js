@@ -7,18 +7,16 @@ import cors from 'cors';
 dotenv.config()
 
 const app = express();
-app.use(express.static('public'));
 app.use(cors());
+app.use(express.static('public'));
+
 
 const {Pool} = pg;
+const dbString = process.env.DATABASE_URL;
 const PORT = 3000;
 
 const pool = new Pool({
-    user: process.env.DB_USER,
-    host: process.env.DB_HOST,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT,
+    connectionString: dbString
 });
 
 app.use(express.json());

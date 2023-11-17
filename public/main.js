@@ -39,10 +39,15 @@ async function login() {
     }
 }
 
-
 async function register() {
     const registerUsername = document.getElementById('registerUsername').value;
     const registerPassword = document.getElementById('registerPassword').value;
+
+    // Check if username and password are not empty
+    if (!registerUsername || !registerPassword) {
+        alert('Registration unsuccessful. Please Try Again.');
+        return;
+    }
 
     try {
         const response = await fetch('https://fittracker-lc3q.onrender.com/api/users/register', {

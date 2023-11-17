@@ -5,37 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LiftTracker</title>
     <link rel="stylesheet" href="main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <script src="main.js" defer></script>
 </head>
 <body>
-    <div id="overlay">
-        <div id="popup">
-            <h2>Login</h2>
-            <form id="loginForm">
-                <label for="username">Username:</label>
-                <input type="text" id="username" required>
-                <br>
-                <label for="password">Password:</label>
-                <input type="password" id="password" required>
-                <br>
-                <button type="button" onclick="login()">Login</button>
-                <button type="button" onclick="showRegisterPopup()">Register</button>
-            </form>
+    <header>
+        <div id="logo">
+            <img src="logo.png" alt="Logo">
         </div>
-    
-        <div id="registerPopup">
-            <h2>Register</h2>
-            <form id="registerForm">
-                <label for="registerUsername">Username:</label>
-                <input type="text" id="registerUsername" required>
-                <br>
-                <label for="registerPassword">Password:</label>
-                <input type="password" id="registerPassword" required>
-                <br>
-                <button type="button" onclick="register()">Register</button>
-                <button type="button" onclick="showLoginPopup()">Back to Login</button>
-            </form>
+        <div id="header-text">
+            <h1>LiftTrack</h1>
+            <h2>Workouts</h2>
+            <h2>Progress</h2>
         </div>
+    </header>
+    <div id="main-content">
+        <div class="box">
+            <img src="arnold.jpeg" alt="image on page">
+            <div class="text-overlay">
+                <h2>Unlock Your True Potential</h2>
+                <p>Success is the sum of small efforts, repeated day in and day out. Keep working hard, stay focused, and watch your progress become your greatest masterpiece</p>
+            </div>
+        </div>
+        <div class="box2">
+            <h1>LOG WORKOUTS.</h1>
+            <h1>STAY ON TRACK.</h1>
+            <h1>BE BETTER.</h1>
+        </div>
+        <p id="info">Create your workouts, log your exercise, track your progress</p>
     </div>
+
+    <footer>
+        &copy; 2023 Lift Tracker <a href="https://www.linkedin.com/in/colin-r-tolliver" target="_blank">LinkedIn</a>
+    </footer>
 </body>
 </html>

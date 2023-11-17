@@ -76,7 +76,7 @@ app.post('/api/workout-plans', async (req, res) => {
 
     try {
         const result = await pool.query(
-            'INSERT INTO "Workout_Plan" (user_id, plan_name, description) VALUES ($1, $2, $3) RETURNING *',
+            'INSERT INTO "workout_plan" (user_id, plan_name, description) VALUES ($1, $2, $3) RETURNING *',
             [user_id, plan_name, description]
         );
 

@@ -26,14 +26,12 @@ async function login() {
 
         const result = await response.json();
 
-        console.log('Login Result:', result);  // Add this line for debugging
+        console.log('Login Result:', result);
 
         if (response.ok && result.success) {
             // Save user_id to localStorage
             const userId = result.user.user_id;
             localStorage.setItem('loggedInUserId', userId);
-
-            console.log('User ID Stored in localStorage:', userId);  // Add this line for debugging
 
             document.getElementById('overlay').style.display = 'none';
         }
@@ -54,6 +52,7 @@ async function createWorkoutPlan() {
     try {
         // Retrieve user_id from localStorage
         const loggedInUserId = localStorage.getItem('loggedInUserId');
+        console.log(loggedInUserId);
 
         const response = await fetch('https://fittracker-lc3q.onrender.com/api/workout-plans', {
             method: 'POST',

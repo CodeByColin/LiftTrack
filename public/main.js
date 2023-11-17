@@ -126,7 +126,7 @@ async function fetchAndDisplayWorkoutPlans() {
             console.log(workoutPlans);
 
             // Assuming you have a div with the id 'workoutPlansContainer' to display the plans
-            const workoutPlansContainer = document.getElementById('workoutPlansContainer');
+            const workoutPlansContainer = document.getElementById('workoutPlanContainer');
 
             // Append each workout plan to the page
             workoutPlans.forEach(plan => {

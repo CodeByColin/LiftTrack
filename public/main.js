@@ -111,7 +111,41 @@ async function register() {
     }
 }
 
+// Assuming you are still working in the same script file as createWorkoutPlan
 
+async function fetchAndDisplayWorkoutPlans() {
+    try {
+        // Retrieve user_id from localStorage
+        const loggedInUserId = localStorage.getItem('loggedInUserId');
+        console.log(loggedInUserId);
+
+        const response = await fetch(`https://fittracker-lc3q.onrender.com/api/workout-plans/${loggedInUserId}`);
+        
+        if (response.ok) {
+            const workoutPlans = await response.json();
+
+            // Assuming you have a div with the id 'workoutPlansContainer' to display the plans
+            const workoutPlansContainer = document.getElementById('workoutPlansContainer');
+
+            // Clear existing content
+            workoutPlansContainer.innerHTML = '';
+
+            // Append each workout plan to the page
+            workoutPlans.forEach(plan => {
+                const planElement = document.createElement('div');
+                planElement.innerHTML = `<p><strong>Plan Name:</strong> ${plan.plan_name}</p><p><strong>Description:</strong> ${plan.description}</p>`;
+                workoutPlansContainer.appendChild(planElement);
+            });
+        } else {
+            const result = await response.json();
+            console.error(result.message);
+            // Handle error (e.g., show an error message)
+        }
+    } catch (error) {
+        console.error(error);
+        // Handle network or unexpected errors
+    }
+}
 
 const getStarted = document.getElementById("GetStarted")
 

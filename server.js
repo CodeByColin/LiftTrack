@@ -88,6 +88,23 @@ app.post('/api/workout-plans', async (req, res) => {
     }
 });
 
+app.get('/api/workout-plans/:user_id', async (req, res) => {
+    const user_id = req.params.user_id;
+
+    try {
+        const result = await pool.query(
+            'SELECT plan_name, description FROM "workout_plan" WHERE user_id = $1',
+            [user_id]
+        );
+
+        const workoutPlans = result.rows;
+        res.status(200).json(workoutPlans);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Internal Server Error' });
+    }
+});
+
 
 
 

@@ -2,9 +2,8 @@ const maincontent = document.getElementById("main-content");
 const workouts = document.getElementById("workouts");
 const loggedInUserString = sessionStorage.getItem('loggedInUser');
 const loggedInUser = JSON.parse(loggedInUserString);
-const userId = loggedInUser.user_id;
 
-console.log('User ID:', userId);
+console.log(loggedInUser);
 
 
 

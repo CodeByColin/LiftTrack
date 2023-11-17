@@ -89,6 +89,17 @@ app.post('/api/workout-plans', async (req, res) => {
 });
 
 
+
+
+
+
+
+
+
+
+
+
+
 app.get('/api/users', async (req, res)  => {
     try {
         const result = await pool.query('SELECT * FROM users')

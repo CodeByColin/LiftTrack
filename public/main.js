@@ -65,6 +65,7 @@ async function createWorkoutPlan() {
         if (response.ok) {
             const result = await response.json();
             console.log('New Workout Plan:', result);
+            fetchAndDisplayWorkoutPlans();
             // Handle success (e.g., update UI, show a success message)
         } else {
             const result = await response.json();

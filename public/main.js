@@ -26,12 +26,15 @@ async function login() {
 
         const result = await response.json();
 
+        console.log('Login Result:', result);  // Add this line for debugging
+
         if (response.ok && result.success) {
             // Save user_id to localStorage
             const userId = result.user.user_id;
             localStorage.setItem('loggedInUserId', userId);
 
-            console.log(result);
+            console.log('User ID Stored in localStorage:', userId);  // Add this line for debugging
+
             document.getElementById('overlay').style.display = 'none';
         }
 
@@ -41,6 +44,7 @@ async function login() {
         alert('An error occurred. Please check the console for details.');
     }
 }
+
 
 // Function to create a workout plan
 async function createWorkoutPlan() {

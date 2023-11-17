@@ -1,3 +1,7 @@
+const maincontent = document.getElementById("main-content")
+
+
+
 
 function showLoginPopup() {
     document.getElementById('popup').style.display = 'block';
@@ -28,7 +32,6 @@ async function login() {
         console.log('Result:', result);
 
         if (response.ok && result.success) {
-            // If login is successful, hide the overlay
             document.getElementById('overlay').style.display = 'none';
         }
 
@@ -43,7 +46,6 @@ async function register() {
     const registerUsername = document.getElementById('registerUsername').value;
     const registerPassword = document.getElementById('registerPassword').value;
 
-    // Check if username and password are not empty
     if (!registerUsername || !registerPassword) {
         alert('Registration unsuccessful. Please Try Again.');
         return;
@@ -71,6 +73,12 @@ async function register() {
         alert('An error occurred. Please try again.');
     }
 }
+
+const getStarted = document.getElementById("GetStarted")
+
+getStarted.addEventListener('click', function () {
+    maincontent.style.display = "none";
+});
 
 
 

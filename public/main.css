@@ -61,18 +61,18 @@ header {
 }
 
 .box img {
-    width: 100%; /* Make the image fill the container */
-    height: auto; /* Maintain aspect ratio */ /* Ensure the image doesn't exceed its natural size */
+    width: 100%;
+    height: auto;
 }
 
 .box .text-overlay {
     position: absolute;
-    top: 50%; /* Position the text in the middle vertically */
-    left: 50%; /* Position the text in the middle horizontally */
-    transform: translate(-95%, 50%); /* Center the text */
-    color: #fffafa; /* Text color */
-    font-size: 1.5vw; /* Adjust text size */
-    text-align: center; /* Center-align the text */
+    top: 50%; 
+    left: 50%;
+    transform: translate(-95%, 50%);
+    color: #fffafa;
+    font-size: 1.5vw;
+    text-align: center;
     text-shadow: 
     -1px -1px 0 black,
      1px -1px 0 black,
@@ -82,12 +82,12 @@ header {
 
 .box2 {
     position: absolute;
-    top: 50%; /* Position the text in the middle vertically */
-    left: 50%; /* Position the text in the middle horizontally */
-    transform: translate(-95%, 200%); /* Center the text */
-    color: black; /* Text color */
-    font-size: 1.6vw; /* Adjust text size */
-    text-align: center; /* Center-align the text */
+    top: 50%;
+    left: 50%; 
+    transform: translate(-120%, 200%);
+    color: black;
+    font-size: 1.6vw;
+    text-align: center;
     text-shadow: 
     -1px -1px 0 black,
      1px -1px 0 black,
@@ -98,12 +98,30 @@ header {
 
 #info {
     position: absolute;
-    top: 155%; /* Position the text in the middle vertically */
-    left: 53%; /* Position the text in the middle horizontally */
-    transform: translate(-95%, 80%); /* Center the text */
-    color: black; /* Text color */
-    font-size: 1.2vw; /* Adjust text size */
+    top: 155%;
+    left: 45%;
+    transform: translate(-95%, 80%);
+    color: black;
+    font-size: 1.2vw;
 }
+
+#GetStarted {
+    position: absolute;
+    top: 155%;
+    left: 33%;
+    transform: translate(-95%, 80%);
+    color: black;
+    font-size: 1.2vw;
+    cursor: pointer;
+    background-color: #000;
+    color: white;
+    margin: 1vw;
+}
+
+#GetStarted:hover {
+    background-color: #3c434a;
+}
+
 
 footer {
     background-color: black;
@@ -125,6 +143,13 @@ footer {
     display: none;
     flex-wrap: wrap;
     justify-content: space-between;
+}
+
+.adjust {
+    width:52%;
+    height: auto;
+    position: relative;
+    left: 48%;
 }
 
 

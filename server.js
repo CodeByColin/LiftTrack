@@ -36,7 +36,6 @@ app.post('/api/users/register', async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     try {
-        // Insert user data into the database
         const result = await pool.query(
             'INSERT INTO "users" (username, password) VALUES ($1, $2) RETURNING *',
             [username, hashedPassword]
@@ -73,6 +72,8 @@ app.post('/api/users/login', async (req, res) => {
         res.status(500).json({ success: false, message: 'Internal Server Error' });
     }
 });
+
+
 
 
 

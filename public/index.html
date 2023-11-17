@@ -17,8 +17,8 @@
         </div>
         <div id="header-text">
             <h1>LiftTrack</h1>
-            <h2>Workouts</h2>
-            <h2>Progress</h2>
+            <h2 id="progressLink">Workouts</h2>
+            <h2 id="workoutsLink">Progress</h2>
         </div>
     </header>
     <div id="main-content">
@@ -35,6 +35,41 @@
             <h1>BE BETTER.</h1>
         </div>
         <p id="info">Create your workouts, log your exercise, track your progress</p>
+        <img class="adjust"src="body2.jpg" alt="second page image">
+        <a id="GetStarted">
+            <h2>Get Started</h2>
+        </a>
+    </div>
+    <div id="workouts">
+    </div>
+    <div id="overlay">
+        <div id="popup">
+            <h2 id="titlepop">Login</h2>
+            <form id="loginForm">
+                <label for="username">Username</label>
+                <input type="text" id="username" required>
+                <br>
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
+                <br>
+                <button class="popBut" type="button" onclick="login()">Login</button>
+                <button class="popBut" type="button" onclick="showRegisterPopup()">Register</button>
+            </form>
+        </div>
+    
+        <div id="registerPopup">
+            <h2 id="titlepop">Register</h2>
+            <form id="registerForm">
+                <label for="registerUsername">Username</label>
+                <input type="text" id="registerUsername" required>
+                <br>
+                <label for="registerPassword">Password</label>
+                <input type="password" id="registerPassword" required>
+                <br>
+                <button class="popBut"  type="button" onclick="register()">Register</button>
+                <button class="popBut"  type="button" onclick="showLoginPopup()">Back to Login</button>
+            </form>
+        </div>
     </div>
 
     <footer>

@@ -123,6 +123,7 @@ async function fetchAndDisplayWorkoutPlans() {
         
         if (response.ok) {
             const workoutPlans = await response.json();
+            console.log(workoutPlans);
 
             // Assuming you have a div with the id 'workoutPlansContainer' to display the plans
             const workoutPlansContainer = document.getElementById('workoutPlansContainer');

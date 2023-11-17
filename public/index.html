@@ -41,6 +41,15 @@
         </a>
     </div>
     <div id="workouts">
+        <form id="createWorkoutPlanForm">
+        <label for="planName">Plan Name</label>
+        <input type="text" id="planName" required>
+        <br>
+        <label for="description">Description</label>
+        <textarea id="description" required></textarea>
+        <br>
+        <button type="button" onclick="createWorkoutPlan()">Create Workout Plan</button>
+        </form>
     </div>
     <div id="overlay">
         <div id="popup">

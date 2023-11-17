@@ -152,6 +152,10 @@ footer {
     left: 48%;
 }
 
+#workouts {
+    display:none;
+}
+
 
 
 footer {

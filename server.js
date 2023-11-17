@@ -16,7 +16,7 @@ const dbString = process.env.DATABASE_URL;
 const PORT = process.env.PORT;
 
 const pool = new Pool({
-    connectionString:dbString
+connectionString: dbString
 });
 
 app.use(express.json());
@@ -45,6 +45,8 @@ app.post('/api/users/register', async (req, res) => {
     }
 });
 
+
+
 app.post('/api/users/login', async (req, res) => {
     const { username, password } = req.body;
 
@@ -69,8 +71,22 @@ app.post('/api/users/login', async (req, res) => {
     }
 });
 
+app.post('/api/workout-plans', async (req, res) => {
+    const { user_id, plan_name, description } = req.body;
 
+    try {
+        const result = await pool.query(
+            'INSERT INTO "Workout_Plan" (user_id, plan_name, description) VALUES ($1, $2, $3) RETURNING *',
+            [user_id, plan_name, description]
+        );
 
+        const newWorkoutPlan = result.rows[0];
+        res.status(201).json(newWorkoutPlan);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Internal Server Error' });
+    }
+});
 
 
 app.get('/api/users', async (req, res)  => {

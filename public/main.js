@@ -1,4 +1,11 @@
-const maincontent = document.getElementById("main-content")
+const maincontent = document.getElementById("main-content");
+const workouts = document.getElementById("workouts");
+const loggedInUserString = sessionStorage.getItem('loggedInUser');
+const loggedInUser = JSON.parse(loggedInUserString);
+const userId = loggedInUser.user_id;
+
+console.log('User ID:', userId);
+
 
 
 
@@ -32,6 +39,7 @@ async function login() {
         console.log('Result:', result);
 
         if (response.ok && result.success) {
+            sessionStorage.setItem('loggedInUser', JSON.stringify(result.user))
             document.getElementById('overlay').style.display = 'none';
         }
 
@@ -73,11 +81,41 @@ async function register() {
         alert('An error occurred. Please try again.');
     }
 }
+// Client-side function to create a workout plan
+async function createWorkoutPlan() {
+    const planName = document.getElementById('planName').value;
+    const description = document.getElementById('description').value;
+
+    try {
+        const response = await fetch('https://fittracker-lc3q.onrender.com/api/workout-plans', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ user_id, plan_name: planName, description }),
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            console.log('New Workout Plan:', result);
+            // Handle success (e.g., update UI, show a success message)
+        } else {
+            const result = await response.json();
+            console.error(result.message);
+            // Handle error (e.g., show an error message)
+        }
+    } catch (error) {
+        console.error(error);
+        // Handle network or unexpected errors
+    }
+}
+
 
 const getStarted = document.getElementById("GetStarted")
 
 getStarted.addEventListener('click', function () {
     maincontent.style.display = "none";
+    workouts.style.display = "flex"
 });
 
 

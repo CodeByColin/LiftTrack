@@ -27,10 +27,11 @@ async function login() {
         const result = await response.json();
 
         if (response.ok && result.success) {
-            // Save user_id to sessionStorage
+            // Save user_id to localStorage
+            const userId = result.user.user_id;
+            localStorage.setItem('loggedInUserId', userId);
+
             console.log(result);
-            const jsonUser = JSON.stringify(result)
-            localStorage.setItem('loggedInUserId', jsonUser);
             document.getElementById('overlay').style.display = 'none';
         }
 
@@ -47,17 +48,15 @@ async function createWorkoutPlan() {
     const description = document.getElementById('description').value;
 
     try {
-        // Retrieve user_id from sessionStorage
-        const loggedInUserId = sessionStorage.getItem('loggedInUserId');
-        const storedUser = JSON.parse(loggedInUserId)
-        const id = storedUser.user_id;
+        // Retrieve user_id from localStorage
+        const loggedInUserId = localStorage.getItem('loggedInUserId');
 
         const response = await fetch('https://fittracker-lc3q.onrender.com/api/workout-plans', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ user_id: id, plan_name: planName, description }),
+            body: JSON.stringify({ user_id: loggedInUserId, plan_name: planName, description }),
         });
 
         if (response.ok) {
@@ -74,6 +73,7 @@ async function createWorkoutPlan() {
         // Handle network or unexpected errors
     }
 }
+
 
 
 async function register() {

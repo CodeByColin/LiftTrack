@@ -31,9 +31,6 @@ async function login() {
 
         if (response.ok && result.success) {
             sessionStorage.setItem('loggedInUser', JSON.stringify(result.user))
-            const loggedInUserString = sessionStorage.getItem('loggedInUser');
-            const loggedInUser = JSON.parse(loggedInUserString);
-            console.log(loggedInUser);
             document.getElementById('overlay').style.display = 'none';
         }
 

@@ -72,6 +72,40 @@ async function createWorkoutPlan() {
 }
 
 
+async function register() {
+    const registerUsername = document.getElementById('registerUsername').value;
+    const registerPassword = document.getElementById('registerPassword').value;
+
+    if (!registerUsername || !registerPassword) {
+        alert('Registration unsuccessful. Please Try Again.');
+        return;
+    }
+
+    try {
+        const response = await fetch('https://fittracker-lc3q.onrender.com/api/users/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username: registerUsername, password: registerPassword })
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            alert('Registration successful. Please log in.');
+            showLoginPopup();
+        } else {
+            const result = await response.json();
+            alert(result.message);
+        }
+    } catch (error) {
+        console.error(error);
+        alert('An error occurred. Please try again.');
+    }
+}
+
+
+
 const getStarted = document.getElementById("GetStarted")
 
 getStarted.addEventListener('click', function () {

@@ -29,7 +29,7 @@ async function login() {
         if (response.ok && result.success) {
             // Save user_id to sessionStorage
             console.log(result);
-            sessionStorage.setItem('loggedInUserId', result.user_id);
+            sessionStorage.setItem('loggedInUserId', result.user.user_id);
             document.getElementById('overlay').style.display = 'none';
         }
 

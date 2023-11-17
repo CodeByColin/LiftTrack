@@ -26,11 +26,9 @@ async function login() {
 
         const result = await response.json();
 
-        console.log('Response:', response);
-        console.log('Result:', result);
-
         if (response.ok && result.success) {
-            sessionStorage.setItem('loggedInUser', JSON.stringify(result.user))
+            // Save user_id to sessionStorage
+            sessionStorage.setItem('loggedInUserId', result.user_id);
             document.getElementById('overlay').style.display = 'none';
         }
 
@@ -41,49 +39,21 @@ async function login() {
     }
 }
 
-async function register() {
-    const registerUsername = document.getElementById('registerUsername').value;
-    const registerPassword = document.getElementById('registerPassword').value;
-
-    if (!registerUsername || !registerPassword) {
-        alert('Registration unsuccessful. Please Try Again.');
-        return;
-    }
-
-    try {
-        const response = await fetch('https://fittracker-lc3q.onrender.com/api/users/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username: registerUsername, password: registerPassword })
-        });
-
-        if (response.ok) {
-            const result = await response.json();
-            alert('Registration successful. Please log in.');
-            showLoginPopup();
-        } else {
-            const result = await response.json();
-            alert(result.message);
-        }
-    } catch (error) {
-        console.error(error);
-        alert('An error occurred. Please try again.');
-    }
-}
-// Client-side function to create a workout plan
+// Function to create a workout plan
 async function createWorkoutPlan() {
     const planName = document.getElementById('planName').value;
     const description = document.getElementById('description').value;
 
     try {
+        // Retrieve user_id from sessionStorage
+        const loggedInUserId = sessionStorage.getItem('loggedInUserId');
+
         const response = await fetch('https://fittracker-lc3q.onrender.com/api/workout-plans', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ user_id, plan_name: planName, description }),
+            body: JSON.stringify({ user_id: loggedInUserId, plan_name: planName, description }),
         });
 
         if (response.ok) {

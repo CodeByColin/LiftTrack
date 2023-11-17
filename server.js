@@ -16,11 +16,7 @@ const dbString = process.env.DATABASE_URL;
 const PORT = process.env.PORT;
 
 const pool = new Pool({
-    user: "colin",
-    host: "localhost",
-    database: "lifttracker",
-    password: '',
-    port: 5432
+    connectionString:dbString
 });
 
 app.use(express.json());

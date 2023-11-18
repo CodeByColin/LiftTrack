@@ -43,6 +43,37 @@ async function login() {
     }
 }
 
+async function register() {
+    const registerUsername = document.getElementById('registerUsername').value;
+    const registerPassword = document.getElementById('registerPassword').value;
+
+    if (!registerUsername || !registerPassword) {
+        alert('Registration unsuccessful. Please Try Again.');
+        return;
+    }
+
+    try {
+        const response = await fetch('https://fittracker-lc3q.onrender.com/api/users/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username: registerUsername, password: registerPassword })
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            alert('Registration successful. Please log in.');
+            showLoginPopup();
+        } else {
+            const result = await response.json();
+            alert(result.message);
+        }
+    } catch (error) {
+        console.error(error);
+        alert('An error occurred. Please try again.');
+    }
+}
 
 // Function to create a workout plan
 async function createWorkoutPlan() {
@@ -78,45 +109,8 @@ async function createWorkoutPlan() {
     }
 }
 
-
-
-async function register() {
-    const registerUsername = document.getElementById('registerUsername').value;
-    const registerPassword = document.getElementById('registerPassword').value;
-
-    if (!registerUsername || !registerPassword) {
-        alert('Registration unsuccessful. Please Try Again.');
-        return;
-    }
-
-    try {
-        const response = await fetch('https://fittracker-lc3q.onrender.com/api/users/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username: registerUsername, password: registerPassword })
-        });
-
-        if (response.ok) {
-            const result = await response.json();
-            alert('Registration successful. Please log in.');
-            showLoginPopup();
-        } else {
-            const result = await response.json();
-            alert(result.message);
-        }
-    } catch (error) {
-        console.error(error);
-        alert('An error occurred. Please try again.');
-    }
-}
-
-// Assuming you are still working in the same script file as createWorkoutPlan
-
 async function fetchAndDisplayWorkoutPlans() {
     try {
-        // Retrieve user_id from localStorage
         const loggedInUserId = localStorage.getItem('loggedInUserId');
         console.log(loggedInUserId);
 
@@ -126,10 +120,8 @@ async function fetchAndDisplayWorkoutPlans() {
             const workoutPlans = await response.json();
             console.log(workoutPlans);
 
-            // Assuming you have a div with the id 'workoutPlansContainer' to display the plans
             const workoutPlansContainer = document.getElementById('workoutPlanContainer');
 
-            // Append each workout plan to the page
             workoutPlans.forEach(plan => {
                 const planElement = document.createElement('div');
                 planElement.innerHTML = `<p><strong>Plan Name:</strong> ${plan.plan_name}</p><p><strong>Description:</strong> ${plan.description}</p>`;
@@ -138,11 +130,9 @@ async function fetchAndDisplayWorkoutPlans() {
         } else {
             const result = await response.json();
             console.error(result.message);
-            // Handle error (e.g., show an error message)
         }
     } catch (error) {
         console.error(error);
-        // Handle network or unexpected errors
     }
 }
 

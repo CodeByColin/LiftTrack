@@ -115,7 +115,7 @@ app.delete('/api/workout-plans/:planId', async (req, res) => {
             return;
         }
 
-        const deleteExercisesQuery = 'DELETE FROM "exercises" WHERE plan_id = $1 RETURNING *';
+        const deleteExercisesQuery = 'DELETE FROM "exercise" WHERE plan_id = $1 RETURNING *';
         await pool.query(deleteExercisesQuery, [planId]);
 
         const deletedPlan = deleteWorkoutPlanResult.rows[0];

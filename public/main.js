@@ -192,6 +192,7 @@ async function addExerciseToPlan() {
         });
 
         if (response.ok) {
+            alert('Exercise added to workout plan');
             closeAddExerciseModal();
             fetchAndDisplayWorkoutPlans();
         } else {

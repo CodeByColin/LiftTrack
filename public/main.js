@@ -121,6 +121,7 @@ async function fetchAndDisplayWorkoutPlans() {
             console.log(workoutPlans);
 
             const workoutPlansContainer = document.getElementById('workoutPlanContainer');
+            workoutPlansContainer.innerHTML = '';
 
             workoutPlans.forEach(plan => {
                 const planElement = document.createElement('div');
@@ -135,6 +136,7 @@ async function fetchAndDisplayWorkoutPlans() {
         console.error(error);
     }
 }
+
 
 const getStarted = document.getElementById("GetStarted")
 

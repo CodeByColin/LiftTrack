@@ -252,6 +252,7 @@ function goBack() {
     workoutPlanContainer.style.display = "flex";
     workouts.style.display = "flex";
     back.style.display = "none";
+    exerciseListContainer.style.display = "none"
 }
 
 

@@ -233,6 +233,7 @@ function displayExercises(exercises) {
     }
     exercises.forEach(exercise => {
         const exerciseElement = document.createElement('div');
+        exerciseElement.classList.add('workout-box');
         exerciseElement.innerHTML = `
             <p><strong>Exercise Name:</strong> ${exercise.exercise_name}</p>
             <p><strong>Sets:</strong> ${exercise.sets}</p>

@@ -126,6 +126,28 @@ app.delete('/api/workout-plans/:planId', async (req, res) => {
     }
 });
 
+app.post('/api/exercises/:planId', async (req, res) => {
+    const planId = req.params.planId;
+    const { exercise_name, sets, repetitions, notes } = req.body;
+
+    try {
+        const insertExerciseQuery = `
+            INSERT INTO "exercise" (plan_id, exercise_name, sets, repetitions, notes)
+            VALUES ($1, $2, $3, $4, $5)
+            RETURNING *`;
+        const insertedExercise = await pool.query(insertExerciseQuery, [planId, exercise_name, sets, repetitions, notes]);
+
+        res.status(201).json({
+            success: true,
+            message: 'Exercise added to workout plan successfully.',
+            exercise: insertedExercise.rows[0],
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Internal Server Error' });
+    }
+});
+
 
 
 

@@ -33,15 +33,13 @@
             <h1>BE BETTER.</h1>
         </div>
         <p id="info">Create your workouts, log your exercise, track your progress</p>
-        <img class="adjust"src="body2.jpg" alt="second page image">
+        <img class="adjust" src="body2.jpg" alt="second page image">
         <a id="GetStarted" onclick="fetchAndDisplayWorkoutPlans();">
             <h2>Get Started</h2>
         </a>
     </div>
-    <div>
-        <button class="back" onclick="goMain()">Back</button>
-        <div id="workouts">
-            <form id="createWorkoutPlanForm">
+    <div id="workouts">
+        <form id="createWorkoutPlanForm">
             <label for="planName">Plan Name</label>
             <input type="text" id="planName" required>
             <br>
@@ -49,11 +47,10 @@
             <textarea id="description" required></textarea>
             <br>
             <button class="popBut" onclick="createWorkoutPlan(event)">Create Workout Plan</button>
-            </form>
-        </div>
-        <div id="workoutPlanContainer">
+        </form>
+    </div>
+    <div id="workoutPlanContainer">
 
-        </div>
     </div>
     <div id="addExerciseModal" class="modal">
         <div class="modal-content">
@@ -73,7 +70,7 @@
     <div id="back button">
         <button class="back" onclick="goBack()">Back</button>
         <div id="exerciseListContainer">
-    
+
         </div>
     </div>
     <div id="overlay">
@@ -90,7 +87,7 @@
                 <button class="popBut" type="button" onclick="showRegisterPopup()">Register</button>
             </form>
         </div>
-    
+
         <div id="registerPopup">
             <h2 id="titlepop">Register</h2>
             <form id="registerForm">

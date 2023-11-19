@@ -104,6 +104,32 @@ app.get('/api/workout-plans/:user_id', async (req, res) => {
     }
 });
 
+app.delete('/api/workout-plans/:planId', async (req, res) => {
+    const planId = req.params.planId;
+
+    try {
+        // Delete the workout plan
+        const deleteWorkoutPlanQuery = 'DELETE FROM "workout_plan" WHERE plan_id = $1 RETURNING *';
+        const deleteWorkoutPlanResult = await pool.query(deleteWorkoutPlanQuery, [planId]);
+
+        if (deleteWorkoutPlanResult.rows.length === 0) {
+            res.status(404).json({ success: false, message: 'Workout plan not found.' });
+            return;
+        }
+
+        // Delete associated exercises
+        const deleteExercisesQuery = 'DELETE FROM "exercises" WHERE plan_id = $1 RETURNING *';
+        await pool.query(deleteExercisesQuery, [planId]);
+
+        const deletedPlan = deleteWorkoutPlanResult.rows[0];
+        res.status(200).json({ success: true, message: `Workout plan with ID ${planId} and associated exercises deleted successfully.` });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Internal Server Error' });
+    }
+});
+
+
 
 
 

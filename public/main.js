@@ -29,7 +29,6 @@ async function login() {
         console.log('Login Result:', result);
 
         if (response.ok && result.success) {
-            // Save user_id to localStorage
             const userId = result.user.user_id;
             localStorage.setItem('loggedInUserId', userId);
 
@@ -76,7 +75,8 @@ async function register() {
 }
 
 // Function to create a workout plan
-async function createWorkoutPlan() {
+async function createWorkoutPlan(event) {
+    event.preventDefault(Default);
     const planName = document.getElementById('planName').value;
     const description = document.getElementById('description').value;
 

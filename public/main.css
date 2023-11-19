@@ -241,7 +241,7 @@ footer {
 }
 
 .back {
-    display: inline-block;
+    display: none;
     padding: 10px 20px;
     background-color: black;
     color: white;

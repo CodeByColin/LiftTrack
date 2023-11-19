@@ -1,5 +1,6 @@
 const maincontent = document.getElementById("main-content");
 const workouts = document.getElementById("workouts");
+const workoutPlanContainer = document.getElementById("workoutPlanContainer");
 
 function showLoginPopup() {
     document.getElementById('popup').style.display = 'block';
@@ -203,6 +204,45 @@ async function addExerciseToPlan() {
         console.error(error);
     }
 }
+
+async function viewExercises(planId) {
+    try {
+        const response = await fetch(`https://fittracker-lc3q.onrender.com/api/exercises/${planId}`);
+        
+        if (response.ok) {
+            const exercises = await response.json();
+            displayExercises(exercises);
+        } else {
+            const result = await response.json();
+            console.error(result.message);
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+function displayExercises(exercises) {
+    const exerciseListContainer = document.getElementById('exerciseListContainer');
+    exerciseListContainer.innerHTML = '';
+    workoutPlanContainer.style.display = "none";
+    workouts.style.display = "none";
+
+    if (exercises.length === 0) {
+        exerciseListContainer.innerHTML = '<p>No exercises available for this workout plan.</p>';
+        return;
+    }
+    exercises.forEach(exercise => {
+        const exerciseElement = document.createElement('div');
+        exerciseElement.innerHTML = `
+            <p><strong>Exercise Name:</strong> ${exercise.exercise_name}</p>
+            <p><strong>Sets:</strong> ${exercise.sets}</p>
+            <p><strong>Repetitions:</strong> ${exercise.repetitions}</p>
+            <p><strong>Notes:</strong> ${exercise.notes}</p>
+        `;
+        exerciseListContainer.appendChild(exerciseElement);
+    });
+}
+
 
 
 

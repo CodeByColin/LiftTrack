@@ -108,11 +108,9 @@ app.delete('/api/workout-plans/:planId', async (req, res) => {
     try {
         await pool.query('BEGIN');
     
-        // Delete exercises associated with the workout plan
         const deleteExercisesQuery = 'DELETE FROM "exercise" WHERE plan_id = $1';
         await pool.query(deleteExercisesQuery, [planId]);
     
-        // Delete the workout plan and get the details
         const deleteWorkoutPlanQuery = 'DELETE FROM "workout_plan" WHERE plan_id = $1 RETURNING *';
         const deleteWorkoutPlanResult = await pool.query(deleteWorkoutPlanQuery, [planId]);
     
@@ -148,6 +146,22 @@ app.post('/api/exercises/:planId', async (req, res) => {
             message: 'Exercise added to workout plan successfully.',
             exercise: insertedExercise.rows[0],
         });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Internal Server Error' });
+    }
+});
+
+app.get('/api/exercises/:planId', async (req, res) => {
+    const planId = req.params.planId;
+
+    try {
+        const getExercisesQuery = 'SELECT * FROM "exercise" WHERE plan_id = $1';
+        const exercisesResult = await pool.query(getExercisesQuery, [planId]);
+
+        const exercises = exercisesResult.rows;
+
+        res.status(200).json(exercises);
     } catch (error) {
         console.error(error);
         res.status(500).json({ success: false, message: 'Internal Server Error' });

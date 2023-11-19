@@ -257,6 +257,7 @@ function goBack(){
         maincontent.style.display = "block";
     }
 }
+goBack();
 
 
 const getStarted = document.getElementById("GetStarted")

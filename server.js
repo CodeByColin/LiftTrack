@@ -105,7 +105,6 @@ app.get('/api/workout-plans/:user_id', async (req, res) => {
 
 app.delete('/api/workout-plans/:planId', async (req, res) => {
     const planId = req.params.planId;
-
     try {
         await pool.query('BEGIN');
     
@@ -130,8 +129,8 @@ app.delete('/api/workout-plans/:planId', async (req, res) => {
         await pool.query('ROLLBACK');
         console.error(error);
         res.status(500).json({ success: false, message: 'Internal Server Error' });
-    }
-    
+    }    
+});
 
 app.post('/api/exercises/:planId', async (req, res) => {
     const planId = req.params.planId;

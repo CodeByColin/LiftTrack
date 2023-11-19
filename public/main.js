@@ -251,6 +251,7 @@ const getStarted = document.getElementById("GetStarted")
 getStarted.addEventListener('click', function () {
     maincontent.style.display = "none";
     workouts.style.display = "flex"
+    windows.scrollTo(0, 0);
 });
 
 

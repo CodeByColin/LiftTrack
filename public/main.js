@@ -129,9 +129,9 @@ async function fetchAndDisplayWorkoutPlans() {
                 planElement.innerHTML = `
                     <p><strong>Plan Name:</strong> ${plan.plan_name}</p>
                     <p><strong>Description:</strong> ${plan.description}</p>
-                    <button class="delete-button" onclick="deleteWorkoutPlan(${plan.id})">X</button>
-                    <button class="add-exercise-button" onclick="addExerciseToPlan(${plan.id})">+</button>
-                    <button class="view" onclick="viewExercises(${plan.id})">View</button>
+                    <button class="delete-button" onclick="deleteWorkoutPlan(${plan.plan_id})">X</button>
+                    <button class="add-exercise-button" onclick="addExerciseToPlan(${plan.plan_id})">+</button>
+                    <button class="view" onclick="viewExercises(${plan.plan_id})">View</button>
                 `;
                 workoutPlansContainer.appendChild(planElement);
             });

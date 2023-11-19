@@ -158,6 +158,7 @@ async function deleteWorkoutPlan(planId) {
             fetchAndDisplayWorkoutPlans();
         } else {
             const result = await response.json();
+            fetchAndDisplayWorkoutPlans();
             console.error(result.message);
         }
     } catch (error) {

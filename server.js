@@ -111,22 +111,16 @@ app.delete('/api/workout-plans/:planId', async (req, res) => {
         const deleteWorkoutPlanQuery = 'DELETE FROM "workout_plan" WHERE plan_id = $1 RETURNING *';
         const deleteWorkoutPlanResult = await pool.query(deleteWorkoutPlanQuery, [planId]);
 
-        const deleteExercisesQuery = 'DELETE FROM "exercises" WHERE plan_id = $1 RETURNING *';
-        const deleteExercisesResult = await pool.query(deleteExercisesQuery, [planId]);
-
-        const deletedPlan = deleteWorkoutPlanResult.rows[0];
-
-        if (!deletedPlan) {
+        if (deleteWorkoutPlanResult.rows.length === 0) {
             res.status(404).json({ success: false, message: 'Workout plan not found.' });
             return;
         }
 
-        res.status(200).json({
-            success: true,
-            message: `Workout plan with ID ${planId} ${
-                deleteExercisesResult.rows.length > 0 ? 'and associated exercises' : ''
-            } deleted successfully.`,
-        });
+        const deleteExercisesQuery = 'DELETE FROM "exercises" WHERE plan_id = $1 RETURNING *';
+        await pool.query(deleteExercisesQuery, [planId]);
+
+        const deletedPlan = deleteWorkoutPlanResult.rows[0];
+        res.status(200).json({ success: true, message: `Workout plan with ID ${planId} and associated exercises deleted successfully.` });
     } catch (error) {
         console.error(error);
         res.status(500).json({ success: false, message: 'Internal Server Error' });

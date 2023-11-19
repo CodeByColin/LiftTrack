@@ -129,9 +129,32 @@ async function fetchAndDisplayWorkoutPlans() {
                 planElement.innerHTML = `
                     <p><strong>Plan Name:</strong> ${plan.plan_name}</p>
                     <p><strong>Description:</strong> ${plan.description}</p>
+                    <button class="delete-button" onclick="deleteWorkoutPlan(${plan.id})">X</button>
+                    <button class="add-exercise-button" onclick="addExerciseToPlan(${plan.id})">+</button>
                 `;
                 workoutPlansContainer.appendChild(planElement);
             });
+        } else {
+            const result = await response.json();
+            console.error(result.message);
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+async function deleteWorkoutPlan(planId) {
+    try {
+        const response = await fetch(`https://fittracker-lc3q.onrender.com/api/workout-plans/${planId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.ok) {
+            console.log(`Workout plan with ID ${planId} deleted successfully.`);
+            fetchAndDisplayWorkoutPlans();
         } else {
             const result = await response.json();
             console.error(result.message);

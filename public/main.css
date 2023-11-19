@@ -240,6 +240,17 @@ footer {
     cursor: pointer;
 }
 
+.back {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
 
 footer {
     margin-top: auto;

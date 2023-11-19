@@ -1,6 +1,8 @@
 const maincontent = document.getElementById("main-content");
 const workouts = document.getElementById("workouts");
 const workoutPlanContainer = document.getElementById("workoutPlanContainer");
+const addExerciseModal = document.getElementById("addExerciseModal");
+const exerciseListContainer = document.getElementById("exerciseListContainer");
 
 function showLoginPopup() {
     document.getElementById('popup').style.display = 'block';
@@ -247,6 +249,19 @@ function mainpage() {
     workoutPlanContainer.style.display = "none";
     workouts.style.display = "none";
     maincontent.style.display = "block";
+}
+
+const back = document.getElementsByClassName('back');
+function goBack(){
+    if (maincontent.style.display = "block") {
+        back.style.display="none";
+    } else if (workoutPlanContainer.style.display === "flex" || workouts.style.display === "flex" || addExerciseModal.style.display === "flex" || exerciseListContainer.style.display === "flex") {
+        workoutPlanContainer.style.display === "none";
+        workouts.style.display === "none";
+        addExerciseModal.style.display === "none";
+        exerciseListContainer.style.display === "none";
+        maincontent.style.display === "block";
+    }
 }
 
 

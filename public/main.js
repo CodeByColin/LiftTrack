@@ -3,7 +3,7 @@ const workouts = document.getElementById("workouts");
 const workoutPlanContainer = document.getElementById("workoutPlanContainer");
 const addExerciseModal = document.getElementById("addExerciseModal");
 const exerciseListContainer = document.getElementById("exerciseListContainer");
-const back = document.getElementsByClassName('back');
+const back = document.getElementsByClassName('back')[0];
 
 function showLoginPopup() {
     document.getElementById('popup').style.display = 'block';
@@ -248,13 +248,19 @@ function displayExercises(exercises) {
     });
 }
 
+function goBack() {
+    workoutPlanContainer.style.display = "flex";
+    workouts.style.display = "flex";
+    back.style.display = "none";
+}
+
 
 const getStarted = document.getElementById("GetStarted")
 
 getStarted.addEventListener('click', function () {
     maincontent.style.display = "none";
     workouts.style.display = "flex"
-    windows.scrollTo(0, 0);
+    window.scrollTo(0, 0);
 });
 
 

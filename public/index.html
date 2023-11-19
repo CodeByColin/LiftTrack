@@ -54,6 +54,21 @@
     <div id="workoutPlanContainer">
 
     </div>
+    <div id="addExerciseModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddExerciseModal()">&times;</span>
+            <h2>Add Exercise to Workout Plan</h2>
+            <label for="exerciseName">Exercise Name:</label>
+            <input type="text" id="exerciseName" required>
+            <label for="sets">Sets:</label>
+            <input type="number" id="sets" required>
+            <label for="repetitions">Repetitions:</label>
+            <input type="number" id="repetitions" required>
+            <label for="notes">Notes:</label>
+            <textarea id="notes"></textarea>
+            <button onclick="addExerciseToPlan()">Add Exercise</button>
+        </div>
+    </div>
     <div id="overlay">
         <div id="popup">
             <h2 id="titlepop">Login</h2>

@@ -81,7 +81,6 @@ async function createWorkoutPlan(event) {
     const description = document.getElementById('description').value;
 
     try {
-        // Retrieve user_id from localStorage
         const loggedInUserId = localStorage.getItem('loggedInUserId');
         console.log(loggedInUserId);
 
@@ -97,15 +96,12 @@ async function createWorkoutPlan(event) {
             const result = await response.json();
             console.log('New Workout Plan:', result);
             fetchAndDisplayWorkoutPlans();
-            // Handle success (e.g., update UI, show a success message)
         } else {
             const result = await response.json();
             console.error(result.message);
-            // Handle error (e.g., show an error message)
         }
     } catch (error) {
         console.error(error);
-        // Handle network or unexpected errors
     }
 }
 
@@ -130,7 +126,7 @@ async function fetchAndDisplayWorkoutPlans() {
                     <p><strong>Plan Name:</strong> ${plan.plan_name}</p>
                     <p><strong>Description:</strong> ${plan.description}</p>
                     <button class="delete-button" onclick="deleteWorkoutPlan(${plan.plan_id})">X</button>
-                    <button class="add-exercise-button" onclick="addExerciseToPlan(${plan.plan_id})">+</button>
+                    <button class="add-exercise-button" onclick="openAddExercise(${plan.plan_id})">+</button>
                     <button class="view" onclick="viewExercises(${plan.plan_id})">View</button>
                 `;
                 workoutPlansContainer.appendChild(planElement);
@@ -159,6 +155,47 @@ async function deleteWorkoutPlan(planId) {
         } else {
             const result = await response.json();
             fetchAndDisplayWorkoutPlans();
+            console.error(result.message);
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+let currentPlanID;
+
+function openAddExerciseModal(planId) {
+    currentPlanID = planId
+    const modal = document.getElementById('addExerciseModal');
+    modal.style.display = 'block';
+}
+
+function closeAddExerciseModal() {
+    const modal = document.getElementById('addExerciseModal');
+    modal.style.display = 'none';
+}
+
+async function addExerciseToPlan() {
+    const planId = currentPlanID;
+    const exerciseName = document.getElementById('exerciseName').value;
+    const sets = document.getElementById('sets').value;
+    const repetitions = document.getElementById('repetitions').value;
+    const notes = document.getElementById('notes').value;
+
+    try {
+        const response = await fetch(`https://fittracker-lc3q.onrender.com/api/exercises/${planId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ exercise_name: exerciseName, sets, repetitions, notes }),
+        });
+
+        if (response.ok) {
+            closeAddExerciseModal();
+            fetchAndDisplayWorkoutPlans();
+        } else {
+            const result = await response.json();
             console.error(result.message);
         }
     } catch (error) {

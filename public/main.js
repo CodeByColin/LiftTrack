@@ -164,7 +164,7 @@ async function deleteWorkoutPlan(planId) {
 
 let currentPlanID;
 
-function openAddExerciseModal(planId) {
+function openAddExercise(planId) {
     currentPlanID = planId
     const modal = document.getElementById('addExerciseModal');
     modal.style.display = 'block';

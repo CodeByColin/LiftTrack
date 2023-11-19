@@ -157,6 +157,25 @@ header {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.delete-button,
+.add-exercise-button,
+.view {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin-top: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.delete-button:hover,
+.add-exercise-button:hover,
+.view:hover {
+    background-color: #333;
+}
+
+
 footer {
     background-color: black;
     color: white;

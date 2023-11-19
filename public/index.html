@@ -38,19 +38,22 @@
             <h2>Get Started</h2>
         </a>
     </div>
-    <div id="workouts">
-        <form id="createWorkoutPlanForm">
-        <label for="planName">Plan Name</label>
-        <input type="text" id="planName" required>
-        <br>
-        <label for="description">Description</label>
-        <textarea id="description" required></textarea>
-        <br>
-        <button class="popBut"button" onclick="createWorkoutPlan(event)">Create Workout Plan</button>
-        </form>
-    </div>
-    <div id="workoutPlanContainer">
+    <div>
+        <button class="back" onclick="goMain()">Back</button>
+        <div id="workouts">
+            <form id="createWorkoutPlanForm">
+            <label for="planName">Plan Name</label>
+            <input type="text" id="planName" required>
+            <br>
+            <label for="description">Description</label>
+            <textarea id="description" required></textarea>
+            <br>
+            <button class="popBut"button" onclick="createWorkoutPlan(event)">Create Workout Plan</button>
+            </form>
+        </div>
+        <div id="workoutPlanContainer">
 
+        </div>
     </div>
     <div id="addExerciseModal" class="modal">
         <div class="modal-content">

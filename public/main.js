@@ -243,6 +243,12 @@ function displayExercises(exercises) {
     });
 }
 
+function mainpage() {
+    workoutPlanContainer.style.display = "none";
+    workouts.style.display = "none";
+    maincontent.style.display = "block";
+}
+
 
 const getStarted = document.getElementById("GetStarted")
 

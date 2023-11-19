@@ -150,7 +150,16 @@ header {
     margin: 0 auto;
 }
 
-
+.workout-box {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    color: #000;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
 
 footer {
     background-color: black;

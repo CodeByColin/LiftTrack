@@ -76,7 +76,7 @@ async function register() {
 
 // Function to create a workout plan
 async function createWorkoutPlan(event) {
-    event.preventDefault(Default);
+    event.preventDefault();
     const planName = document.getElementById('planName').value;
     const description = document.getElementById('description').value;
 
@@ -125,7 +125,11 @@ async function fetchAndDisplayWorkoutPlans() {
 
             workoutPlans.forEach(plan => {
                 const planElement = document.createElement('div');
-                planElement.innerHTML = `<p><strong>Plan Name:</strong> ${plan.plan_name}</p><p><strong>Description:</strong> ${plan.description}</p>`;
+                planElement.classList.add('workout-box');
+                planElement.innerHTML = `
+                    <p><strong>Plan Name:</strong> ${plan.plan_name}</p>
+                    <p><strong>Description:</strong> ${plan.description}</p>
+                `;
                 workoutPlansContainer.appendChild(planElement);
             });
         } else {
@@ -136,6 +140,7 @@ async function fetchAndDisplayWorkoutPlans() {
         console.error(error);
     }
 }
+
 
 
 const getStarted = document.getElementById("GetStarted")

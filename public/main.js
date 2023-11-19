@@ -256,6 +256,12 @@ function goBack() {
     exerciseListContainer.style.display = "none"
 }
 
+function goMain() {
+    workouts.style.display = "none";
+    workoutPlansContainer.style.display = "none";
+    maincontent.style.display = "block";
+}
+
 
 const getStarted = document.getElementById("GetStarted")
 

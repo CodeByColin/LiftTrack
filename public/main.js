@@ -194,7 +194,6 @@ async function addExerciseToPlan() {
 
         if (response.ok) {
             alert('Exercise added to workout plan');
-            closeAddExerciseModal();
             fetchAndDisplayWorkoutPlans();
         } else {
             const result = await response.json();
@@ -243,6 +242,30 @@ function displayExercises(exercises) {
         exerciseListContainer.appendChild(exerciseElement);
     });
 }
+
+
+
+function goBack() {
+    // Check the current state and decide which containers to show/hide
+    if (workouts.style.display === "flex") {
+        // If on the workouts page, go back to main content
+        workouts.style.display = "none";
+        maincontent.style.display = "flex";
+    } else if (workoutPlanContainer.style.display === "flex") {
+        // If on the workout plans page, go back to the main content
+        workoutPlanContainer.style.display = "none";
+        maincontent.style.display = "flex";
+    } else if (exerciseListContainer.style.display === "flex") {
+        // If on the exercises page, go back to workout plans
+        exerciseListContainer.style.display = "none";
+        workoutPlanContainer.style.display = "flex";
+    }
+    // Add more conditions based on your page structure
+
+    // Scroll to the top of the page after going back
+    window.scrollTo(0, 0);
+}
+
 
 
 

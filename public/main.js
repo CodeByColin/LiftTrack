@@ -245,20 +245,6 @@ function displayExercises(exercises) {
     });
 }
 
-const back = document.getElementsByClassName('back');
-function goBack(){
-    if (maincontent.style.display === "block") {
-        back.style.display="none";
-    } else if (workoutPlanContainer.style.display === "flex" || workouts.style.display === "flex" || addExerciseModal.style.display === "flex" || exerciseListContainer.style.display === "flex") {
-        workoutPlanContainer.style.display = "none";
-        workouts.style.display = "none";
-        addExerciseModal.style.display = "none";
-        exerciseListContainer.style.display = "none";
-        maincontent.style.display = "block";
-    }
-}
-goBack();
-
 
 const getStarted = document.getElementById("GetStarted")
 

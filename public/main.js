@@ -226,6 +226,7 @@ async function viewExercises(planId) {
 function displayExercises(exercises) {
     const exerciseListContainer = document.getElementById('exerciseListContainer');
     exerciseListContainer.innerHTML = '';
+    exerciseListContainer.style.display = "flex";
     workoutPlanContainer.style.display = "none";
     workouts.style.display = "none";
     back.style.display = "inline-block";

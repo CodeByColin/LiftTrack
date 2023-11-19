@@ -243,29 +243,6 @@ function displayExercises(exercises) {
     });
 }
 
-const back = document.getElementById("backButton");
-function goBack() {
-    // Check the current state and decide which containers to show/hide
-    if (maincontent.style.display = "flex") {
-        back.style.display = "none"
-    } else if (workoutPlanContainer.style.display === "flex") {
-        // If on the workout plans page, go back to the main content
-        workoutPlanContainer.style.display = "none";
-        maincontent.style.display = "flex";
-    } else if (exerciseListContainer.style.display === "flex") {
-        // If on the exercises page, go back to workout plans
-        exerciseListContainer.style.display = "none";
-        workoutPlanContainer.style.display = "flex";
-    }
-    // Add more conditions based on your page structure
-
-    // Scroll to the top of the page after going back
-    window.scrollTo(0, 0);
-}
-
-
-
-
 
 const getStarted = document.getElementById("GetStarted")
 

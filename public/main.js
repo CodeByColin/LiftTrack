@@ -3,6 +3,7 @@ const workouts = document.getElementById("workouts");
 const workoutPlanContainer = document.getElementById("workoutPlanContainer");
 const addExerciseModal = document.getElementById("addExerciseModal");
 const exerciseListContainer = document.getElementById("exerciseListContainer");
+const back = document.getElementsByClassName('back');
 
 function showLoginPopup() {
     document.getElementById('popup').style.display = 'block';
@@ -227,6 +228,8 @@ function displayExercises(exercises) {
     exerciseListContainer.innerHTML = '';
     workoutPlanContainer.style.display = "none";
     workouts.style.display = "none";
+    back.style.display = "inline-block";
+    
 
     if (exercises.length === 0) {
         exerciseListContainer.innerHTML = '<p>No exercises available for this workout plan.</p>';

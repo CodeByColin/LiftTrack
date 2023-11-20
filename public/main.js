@@ -274,7 +274,7 @@ async function viewExercises(planId) {
     }
 }
 
-// Function to display exercises in the UI
+// Function to display exercises
 function displayExercises(exercises) {
     const exerciseListContainer = document.getElementById('exerciseListContainer');
     exerciseListContainer.innerHTML = '';

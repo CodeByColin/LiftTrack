@@ -34,17 +34,12 @@ To use the Fitness Tracker, start the application and navigate to `http://localh
 - **Responsive Design**: Compatible with various devices and screen sizes.
 
 ## Dependencies
-- React.js for the frontend.
+- Javascript/Jquery for the frontend.
 - Express.js for the backend server.
 - PostgreSQL for the database.
 - bcrypt for hashing passwords.
 - CORS for handling cross-origin requests.
 - Additional frontend and backend dependencies.
-
-## Configuration
-Before running the app, configure the environment variables:
-1. Create a `.env` file in the project root.
-2. Set the database URL and other necessary environment variables.
 
 ## Documentation
 The project is documented throughout the codebase with comments and docstrings. Each component, function, and server route is clearly described for easy understanding and maintenance.
@@ -57,5 +52,3 @@ The project is documented throughout the codebase with comments and docstrings. 
 ## Troubleshooting
 - **Issue**: Application not starting.
 **Solution**: Ensure all dependencies are installed and environment variables are correctly set.
-- **Issue**: Database connection errors.
-**Solution**: Verify the database URL and credentials in the `.env` file.
